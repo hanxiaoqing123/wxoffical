@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+ <html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/pagebase.css" />
+<link rel="stylesheet" href="css/style.css" />
+<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+<script type="text/javascript" src="js/customMenu.js"></script>
+<style>
+/*页面默认设置*/
+body {
+	font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande",
+		"Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB",
+		"Hiragino Sans GB W3", "WenQuanYi Micro Hei", sans-serif;
+}
+/*解决win8 IE10 兼容  s*/
+@
+-webkit-viewport {
+	width: device-width;
+}
+ @
+-moz-viewport {
+	width: device-width;
+}
+ @
+-ms-viewport {
+	width: device-width;
+}
+ @
+-o-viewport {
+	width: device-width;
+}
+ @
+viewport {
+	width: device-width;
+}
+ /*三大模块 共用样式*/
+body, html {
+	height: 100%;
+	font-family: "Microsoft YaHei";
+}
+ .tishi {
+	background-color: #F9EDBE;
+	border: 1px solid #F0C36D;
+	padding: 7px;
+	box-shadow: 0 0 3px #000;
+}
+ .huise_btn {
+	background-color: #F3F3F3;
+}
+ .caidan_tab {
+ }
+ .biaotou {
+	background-color: #EEEEEE;
+	border-bottom: none;
+}
+</style>
+ <title>自定义菜单管理</title>
+</head>
+<body>
+<script>
+//弹出垂直菜单
+$(".menu").click(function() {
+    if ($(this).hasClass("cura")) {
+        $(this).children(".new-sub").hide(); //当前菜单下的二级菜单隐藏
+        $(".menu").removeClass("cura"); //同一级的菜单项
+    } else {
+        $(".menu").removeClass("cura"); //移除所有的样式
+        $(this).addClass("cura"); //给当前菜单添加特定样式
+        $(".menu").children(".new-sub").hide(); //隐藏所有的二级菜单
+        $(this).children(".new-sub").show(); //展示当前的二级菜单
+    }
+});
+//弹出垂直菜单end
+//底部右侧弹出隐藏
+var flag4 = 1;
+$(".btn-open-close,.btn-fullbg").click(function() {
+    if (flag4 == 1) {
+        $(".btn4,.expan4,.btn-fullbg").show();
+        $(".btn-open-close").addClass('expan3');
+        flag4 = 0;
+    } else {
+        $(".btn-fullbg,.new-sub,.btn4,.expan4").hide();
+        $(".menu").removeClass('cura');
+        $(".btn-open-close").removeClass('expan3');
+        flag4 = 1;
+    }
+})
+//底部右侧弹出隐藏end
+</script>
+	<div class="container">
+		<div class="tit">
+			<h1>自定义菜单管理</h1>
+			<hr style="border-color: #ADADAD;" />
+		</div>
+		<div class="tishi">
+			<p>注意：1级菜单最多只能开启3个，2级子菜单最多开启5个!</p>
+			<p>只有保存主菜单后才可以添加子菜单</p>
+			<p>生成自定义菜单,必须在已经保存的基础上进行,临时勾选启用点击生成是无效的! 第一步必须先修改保存状态！第二步点击生成!</p>
+			<p>当您为自定义菜单填写链接地址时请填写以"http://"开头，这样可以保证用户手机浏览的兼容性更好</p>
+			<p>撤销自定义菜单：撤销后，您的微信公众帐号上的自定义菜单将不存在；如果您想继续在微信公众帐号上使用自定义菜单，请点击“生成自定义菜单”按钮，将重新启用！</p>
+		</div>
+		<br />
+		<!--<div class="zhucaidan">
+				<input type="button" class="btn btn-default huise_btn" value="+添加主菜单" onclick="add_zhu()"/>
+			</div>-->
+		<br />
+		<div class="edit_caidan">
+			<table class="table table-hover caidan_tab">
+				<thead class="biaotou">
+				<tr>
+					<th>显示顺序</th>
+					<th>菜单名称</th>
+					<th>触发动作</th>
+					<th>响应动作</th>
+					<th>启用</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单1
+                    -->
+				<tbody>
+				<tr id="tab1">
+					<td><input type="tel" value="1" /></td>
+					<td>主：<input type="text"  /> &emsp; <input type="button"
+						value="+" class="btn btn-primary btn-xs" title="添加子菜单" id="add1" />
+					</td>
+					<td><select onchange="getValue1()" id="zhu1">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td>
+						<!--<a href="html/wenben.html" id="zhu1_1" style="display: none;"><input type="text" style="border: none;" placeholder="点击编辑文本信息"/></a>-->
+						<textarea id="zhu1_1" style="display: none;" placeholder="请输入文本消息"></textarea>
+						<a href="imageTextList.html" id="zhu1_2" style="display: none;">
+							<input value="点击编辑图文信息" type="button" />
+						</a>
+						<input type="text" id="zhu1_3" style="display: none;" placeholder="请输入链接地址" />
+
+					</td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单1下的子菜单1
+                    -->
+				<tr id="z1_zi1" style="display: none;" class="zi1">
+					<td><input type="tel" value="11" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue11()" id="zhu1_zi1">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu1_zi1_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu1_zi1_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu1_zi1_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单1下的子菜单2
+                    -->
+				<tr id="z1_zi2" style="display: none;" class="zi1">
+					<td><input type="tel" value="11" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue12()" id="zhu1_zi2">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu1_zi2_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu1_zi2_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu1_zi2_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单1下的子菜单3
+                    -->
+				<tr id="z1_zi3" style="display: none;" class="zi1">
+					<td><input type="tel" value="11" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue13()" id="zhu1_zi3">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu1_zi3_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu1_zi3_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu1_zi3_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单1下的子菜单4
+                    -->
+				<tr id="z1_zi4" style="display: none;" class="zi1">
+					<td><input type="tel" value="11" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue14()" id="zhu1_zi4">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu1_zi4_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu1_zi4_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu1_zi4_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单1下的子菜单5
+                    -->
+				<tr id="z1_zi5" style="display: none;" class="zi1">
+					<td><input type="tel" value="11" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue15()" id="zhu1_zi5">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu1_zi5_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu1_zi5_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu1_zi5_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单2
+                    -->
+				<tr id="tab2">
+					<td><input type="tel" value="2" /></td>
+					<td>主：<input type="text" /> &emsp; <input type="button"
+						value="+" class="btn btn-primary btn-xs" title="添加子菜单" id="add2" />
+					</td>
+					<td><select onchange="getValue2()" id="zhu2">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu2_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html" id="zhu2_2"
+						style="display: none;"><input value="点击编辑图文信息" type="button" /></a>
+						<input type="text" id="zhu2_3" style="display: none;"
+						placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单2 的 子菜单1
+                    -->
+				<tr id="z2_zi1" style="display: none;">
+					<td><input type="tel" value="21" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue21()" id="zhu2_zi1">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu2_zi1_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu2_zi1_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu2_zi1_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单2 的 子菜单2
+                    -->
+				<tr id="z2_zi2" style="display: none;">
+					<td><input type="tel" value="21" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue22()" id="zhu2_zi2">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu2_zi2_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu2_zi2_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu2_zi2_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单2 的 子菜单3
+                    -->
+				<tr id="z2_zi3" style="display: none;">
+					<td><input type="tel" value="21" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue23()" id="zhu2_zi3">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu2_zi3_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu2_zi3_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu2_zi3_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单2 的 子菜单4
+                    -->
+				<tr id="z2_zi4" style="display: none;">
+					<td><input type="tel" value="21" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue24()" id="zhu2_zi4">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu2_zi4_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu2_zi4_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu2_zi4_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单2 的 子菜单5
+                    -->
+				<tr id="z2_zi5" style="display: none;">
+					<td><input type="tel" value="21" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue25()" id="zhu2_zi5">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu2_zi5_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu2_zi5_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu2_zi5_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单3 
+                   -->
+				<tr id="tab3">
+					<td><input type="tel" value="3" /></td>
+					<td>主：<input type="text" /> &emsp; <input type="button"
+						value="+" class="btn btn-primary btn-xs" title="添加子菜单" id="add3" />
+					</td>
+					<td><select onchange="getValue3()" id="zhu3">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu3_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html" id="zhu3_2"
+						style="display: none;"><input value="点击编辑图文信息" type="button" /></a>
+						<input type="text" id="zhu3_3" style="display: none;"
+						placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单3 的 子菜单1
+                    -->
+				<tr id="z3_zi1" style="display: none;">
+					<td><input type="tel" value="31" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue31()" id="zhu3_zi1">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu3_zi1_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu3_zi1_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu3_zi1_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单3 的 子菜单2
+                    -->
+				<tr id="z3_zi2" style="display: none;">
+					<td><input type="tel" value="31" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue32()" id="zhu3_zi2">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu3_zi2_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu3_zi2_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu3_zi2_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单3 的 子菜单3
+                    -->
+				<tr id="z3_zi3" style="display: none;">
+					<td><input type="tel" value="31" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue33()" id="zhu3_zi3">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu3_zi3_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu3_zi3_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu3_zi3_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单3 的 子菜单4
+                    -->
+				<tr id="z3_zi4" style="display: none;">
+					<td><input type="tel" value="31" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue34()" id="zhu3_zi4">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu3_zi4_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu3_zi4_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu3_zi4_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				<!--
+                    	作者：zhoujie3518@163.com
+                    	时间：2016-06-20
+                    	描述：主菜单3 的 子菜单5
+                    -->
+				<tr id="z3_zi5" style="display: none;">
+					<td><input type="tel" value="31" /></td>
+					<td>——子：<input type="text" />
+					</td>
+					<td><select onchange="getValue35()" id="zhu3_zi5">
+							<option value="0">请选择</option>
+							<option value="1">发送信息</option>
+							<option value="2">跳转图文信息页</option>
+							<option value="3">跳转链接</option>
+					</select></td>
+					<td><textarea id="zhu3_zi5_1" style="display: none;"
+							placeholder="请输入文本消息"></textarea> <a href="imageTextList.html"
+						id="zhu3_zi5_2" style="display: none;"><input value="点击编辑图文信息"
+							type="button" /></a> <input type="text" id="zhu3_zi5_3"
+						style="display: none;" placeholder="请输入链接地址" /></td>
+					<td><input type="checkbox" /></td>
+					<td><a href="#">删除</a></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="chuli">
+			<input type="button" class="btn btn-primary" value="保存" />
+			<input type="button" class="btn btn-primary" value="生成自定义菜单" />&emsp;&emsp;&emsp;
+			<input type="button"class="btn btn-default huise_btn" value="撤销自定义菜单" />
+		</div>
+	</div>
+</body>
+</html>
